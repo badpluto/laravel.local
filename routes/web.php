@@ -13,28 +13,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-////    try {
-////        DB::connection()->getPdo();
-////        echo "Connected successfully to: " . DB::connection()->getDatabaseName();
-////    } catch (\Exception $e) {
-////        die("Could not connect to the database. Please check your configuration. error:" . $e );
-////    }
-////    die;
-//    return view('welcome');
-//});
-//
+Route::get('/', function () {
+//    try {
+//        DB::connection()->getPdo();
+//        echo "Connected successfully to: " . DB::connection()->getDatabaseName();
+//    } catch (\Exception $e) {
+//        die("Could not connect to the database. Please check your configuration. error:" . $e );
+//    }
+//    die;
+    return view('welcome');
+});
+
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/', [
-    'as' => 'index',
-    'uses' => 'HomeController@index'
-]);
+Route::prefix('admin')->group(function () {
+    Route::get('/', 'Admin\DashboardController@index')->name('AdminDashboard');
+    Route::resource('posts', 'Admin\PostController');
+});
 
-Route::get('/posts/{slug}', [
-    'as' => 'get-post',
-    'uses' => 'PostController@getPost'
-]);
+
+
+//Route::get('/', [
+//    'as' => 'index',
+//    'uses' => 'HomeController@index'
+//]);
+//
+//Route::get('/posts/{slug}', [
+//    'as' => 'get-posts',
+//    'uses' => 'PostController@getPost'
+//]);
 

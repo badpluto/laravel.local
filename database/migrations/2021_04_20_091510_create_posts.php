@@ -15,10 +15,14 @@ class  CreatePosts extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title',100);
-            $table->text('body');
-            $table->string('slug',200);
-            $table->boolean('enabled');
+            $table->string('title');
+            $table->text('content');
+            $table->string('image')->nullable();
+            $table->integer('category_id')->nullable();
+            $table->integer('user_id')->nullable();
+            $table->integer('status')->default(0);
+            $table->integer('views')->default(0);
+            $table->integer('is_featured')->default(0);
             $table->timestamps();
         });
     }
